@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { CgMenuRight } from "react-icons/cg";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { CursorContext } from "../context/CursorContext";
+
+
+
 
 
 const menuVarients = {
@@ -18,6 +22,7 @@ const menuVarients = {
 };
 
 const MobileNav = () => {
+  const { mouseEnter, mouseLeave } = useContext(CursorContext);
   const Location = useLocation()
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -48,7 +53,10 @@ const MobileNav = () => {
         >
           <IoMdClose />
         </div>
-        <ul className=" h-full ">
+        <ul 
+        onMouseEnter={mouseEnter}
+        onMouseLeave={mouseLeave}
+        className=" h-full ">
           <li className="  h-full flex flex-col  justify-center text-primary font-primary font-bold text-3xl items-center gap-y-8">
             <Link to={"/"}>Home</Link>
             <Link to={"/about"}>About</Link>
